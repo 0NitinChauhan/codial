@@ -10,40 +10,51 @@ module.exports.userHome = function (request, response) {
     return response.render("users", locals);
 }
 
-// render the sign up page
+// render the sign up page - get
 module.exports.signUp = function (request, response) {
     let locals = { "title": "Codial Home!" }
     return response.render("user_sign_up", locals);
 };
 
+// render the sign-in page - get
 module.exports.signIn = function (request, response) {
     let locals = { "title": "Codial Home!" }
     return response.render("user_sign_in", locals);
 };
 
-// Sign-Up user on Codial!
+// Sign-Up user on Codial - post
 module.exports.createUser = function (request, response) {
-    console.log(request.body);
-    UserModel.create({
-        email: request.body.email,
-        first_name: request.body.first_name,
-        last_name: request.body.last_name,
-        password: request.body.password
-    }, function (error, newItem) {
-        if (error) {
-            console.log("Failed to create DB entry");
-            response.status(400);
-            return response.send(error);
+    UserModel.findOne({ email: request.body.email }, function (err, user) {
+        if (err) {
+            console.log(`Error finding user for signing-up: ${err}`);
+            return response.redirect("back");
+        }
+        if (!user) {
+            // create the user in the DB
+            UserModel.create({
+                email: request.body.email,
+                first_name: request.body.first_name,
+                last_name: request.body.last_name,
+                password: request.body.password
+            }, function (error, newItem) {
+                if (error) {
+                    console.log("Failed to create DB entry");
+                    response.status(400);
+                    return response.send(error);
+                }
+                else {
+                    console.log("Created new item: ", newItem);
+                    return response.redirect("/users/sign-in");
+                }
+            });
         }
         else {
-            console.log("Created new item: ", newItem);
-            return response.send(newItem);
+            return response.redirect("/users/sign-in");
         }
     });
-
 }
 
-// Sign-In - create session for the user!
+// Sign-In - create session for the user - post
 module.exports.createSession = function (request, response) {
     console.log(request.body);
     return response.send(request.body);

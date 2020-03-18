@@ -1,4 +1,5 @@
 const express = require('express');
+const cookieParser = require("cookie-parser");
 const router = express.Router();
 
 // Import Controllers
@@ -10,7 +11,8 @@ console.log("Router loaded");
 router.use(express.urlencoded());
 
 
-//router.get("/", homeController.home);     // any request that start with / and doesn't have users will go to homeController
+
+router.get("/", homeController.getHome);     // any request that start with / and doesn't have users will go to homeController
 
 
 router.use("/users", require("./users"));  // this route handles all requests for /users
