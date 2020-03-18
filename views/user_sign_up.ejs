@@ -1,0 +1,54 @@
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+
+
+
+<h3> <%= title %></h3>
+
+<div class="valign-wrapper row login-box">
+    <div class="col card hoverable s10 pull-s1 m6 pull-m3 l4 pull-l4">
+        <form action="/users/create" method="POST">
+            <div class="card-content">
+                <span class="card-title">Enter credentials</span>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input placeholder="Grace" id="first_name" type="text" class="validate" name="first_name">
+                        <label for="first_name">First Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input placeholder="Hopper" id="last_name" type="text" class="validate" name="last_name">
+                        <label for="last_name">Last Name</label>
+                    </div>
+
+                    <div class="input-field col s12">
+                        <label for="email">Email address</label>
+                        <input type="email" class="validate" name="email" id="email" />
+                    </div>
+                    <div class="input-field col s12">
+                        <label for="password">Password </label>
+                        <input type="password" class="validate" name="password" id="password" />
+                    </div>
+                    <!--
+                    <div class="input-field  col s6">
+                        <input id="passwordConfirm" type="password">
+                        <label id="lblPasswordConfirm" for="passwordConfirm" data-error="Password not match"
+                            data-success="Password Match">Password (Confirm)</label>
+                    </div>-->
+                </div>
+                <div class="card-action">
+                    <button class="btn waves-effect waves-light" type="submit">Sign-up
+                    </button>
+                </div>
+                <div class="container signin">
+                    Already have an account? <a href="/users/sign-in">Sign in</a>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</div>
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="./assets/javascript/sign-up.js"></script>
