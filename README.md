@@ -1,3 +1,7 @@
 # codial
 
-Social Media Website - Training Wheels for Node.js, Express, mongoDB!
+Social Media Website
+
+* Training Wheels Project - Node.js, Express, mongoDB
+* Authentication using Passport.js
+* Session Management using express-session & MongoStore

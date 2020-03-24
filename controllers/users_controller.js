@@ -12,15 +12,28 @@ module.exports.userHome = function (request, response) {
 
 // render the sign up page - get
 module.exports.signUp = function (request, response) {
+    if (request.isAuthenticated()) {
+        return response.redirect("/users/profile");
+    }
     let locals = { "title": "Codial Home!" }
     return response.render("user_sign_up", locals);
 };
 
 // render the sign-in page - get
 module.exports.signIn = function (request, response) {
+    if (request.isAuthenticated()) {
+        return response.redirect("/users/profile");
+    }
     let locals = { "title": "Codial Home!" }
     return response.render("user_sign_in", locals);
 };
+
+// sign-out
+module.exports.destroySession = function (request, response) {
+    // passport gives 'logout()' function to request
+    request.logout();
+    return response.redirect("/");
+}
 
 // Sign-Up user on Codial - post
 module.exports.createUser = function (request, response) {
@@ -56,8 +69,8 @@ module.exports.createUser = function (request, response) {
 
 // Sign-In - create session for the user - post
 module.exports.createSession = function (request, response) {
-    console.log(request.body);
-    return response.send(request.body);
+    // session is created in Passport.js itself
+    return response.redirect("/");
 }
 
 
